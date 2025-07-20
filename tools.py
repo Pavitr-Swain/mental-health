@@ -1,5 +1,12 @@
 import os, datetime
 from langchain.tools import Tool
+from langchain_google_genai import ChatGoogleGenerativeAI
+
+llm = ChatGoogleGenerativeAI(
+    model="gemini-1.5-flash",
+    temperature=0.3,
+    google_api_key=os.getenv("GOOGLE_API_KEY")  # 👈 This line is critical
+)
 
 def log_mood_entry(entry: str):
     os.makedirs("logs", exist_ok=True)
@@ -10,21 +17,10 @@ def log_mood_entry(entry: str):
     return f"Entry logged at {timestamp}"
 
 def suggest_activity(mood: str):
-    mood = mood.lower()
-    if "anxious" in mood:
-        return "Try deep breathing for 5 minutes or write down what you're feeling."
-    elif "sad" in mood:
-        return "Call a friend or take a walk in nature."
-    elif "angry" in mood:
-        return "Pause and breathe deeply for 60 seconds."
-    elif "tired" in mood:
-        return "Take a power nap or rest your eyes for 10 minutes."
-    elif "calm" in mood or "happy" in mood:
-        return "That's great! Write in your gratitude journal or enjoy your favorite song."
-    else:
-        return "Try light stretching or a short mindfulness break."
+    response = llm.invoke(f"The user is feeling {mood}. Suggest a helpful activity.")
+    return response.content
 
 tools = [
     Tool(name="log_mood_entry", func=log_mood_entry, description="Log mood entry"),
-    Tool(name="suggest_activity", func=suggest_activity, description="Suggest self-care tip")
+    Tool(name="suggest_activity", func=suggest_activity, description="Suggest self-care tip")
 ]
