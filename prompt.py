@@ -21,8 +21,8 @@ prompt = ChatPromptTemplate.from_messages([
 Your task:
 1. Ask the user how they are feeling.
 2. Acknowledge with empathy.
-3. Use the tool `suggest_activity`.
-4. Log the user's message using `log_mood_entry`.
+3. Use the tool suggest_activity.
+4. Log the user's message using log_mood_entry.
 5. Reply only in this strict JSON format:
 
 {{
