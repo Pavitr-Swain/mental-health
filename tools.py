@@ -24,3 +24,4 @@ tools = [
     Tool(name="log_mood_entry", func=log_mood_entry, description="Log mood entry"),
     Tool(name="suggest_activity", func=suggest_activity, description="Suggest self-care tip")
 ]
+"Updated code and README with live deployment link"
