@@ -23,8 +23,4 @@ def suggest_activity(mood: str):
 tools = [
     Tool(name="log_mood_entry", func=log_mood_entry, description="Log mood entry"),
     Tool(name="suggest_activity", func=suggest_activity, description="Suggest self-care tip")
-<<<<<<< HEAD
 ]
-=======
-]
->>>>>>> 519fb10bab39203805c4421cdf636ce0e1e4582e
